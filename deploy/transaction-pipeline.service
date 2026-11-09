@@ -1,0 +1,11 @@
+[Unit]
+Description=Traiter les nouveaux fichiers CSV du bucket S3
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/transaction-pipeline
+ExecStart=/usr/bin/flock -n /opt/transaction-pipeline/pipeline.lock /usr/bin/docker compose run --rm -T pipeline process --source s3
+TimeoutStartSec=300

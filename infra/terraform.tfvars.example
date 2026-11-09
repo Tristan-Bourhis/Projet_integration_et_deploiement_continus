@@ -1,0 +1,4 @@
+region            = "eu-west-3"
+instance_type     = "t3.small"
+ssh_public_key    = "ssh-ed25519 REMPLACER_PAR_VOTRE_CLE_PUBLIQUE"
+ssh_allowed_cidrs = ["203.0.113.10/32"] # Remplacer par les IP réelles (admin et runner CD)

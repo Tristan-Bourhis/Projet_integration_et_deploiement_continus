@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "transaction-pipeline"
+version = "1.0.0"
+description = "Pipeline de transactions financières, S3, PostgreSQL et CI/CD"
+requires-python = ">=3.12"
+dependencies = ["boto3>=1.35,<2", "SQLAlchemy>=2.0.36,<2.1", "psycopg[binary]>=3.2,<4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1"]
+
+[project.scripts]
+transaction-pipeline = "transaction_pipeline.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["services: integration avec PostgreSQL et un vrai service S3"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

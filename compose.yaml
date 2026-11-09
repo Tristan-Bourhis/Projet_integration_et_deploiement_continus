@@ -1,0 +1,55 @@
+name: transaction-pipeline
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    environment:
+      POSTGRES_USER: pipeline
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copier .env.example vers .env}
+      POSTGRES_DB: transactions
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pipeline -d transactions"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+  s3:
+    image: chrislusf/seaweedfs:3.85
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - |
+        printf '{"identities":[{"name":"pipeline","credentials":[{"accessKey":"%s","secretKey":"%s"}],"actions":["Admin","Read","Write","List","Tagging"]}]}' "$$S3_ACCESS_KEY" "$$S3_SECRET_KEY" > /tmp/s3.json
+        exec weed server -dir=/data -ip=s3 -ip.bind=0.0.0.0 -master.volumeSizeLimitMB=100 -volume.max=100 -s3 -s3.port=8333 -s3.config=/tmp/s3.json
+    environment:
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:?S3_ACCESS_KEY requis}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?S3_SECRET_KEY requis}
+    ports:
+      - "127.0.0.1:${S3_PORT:-8333}:8333"
+    volumes:
+      - s3-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:9333/cluster/status"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+  pipeline:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://pipeline:${POSTGRES_PASSWORD}@postgres:5432/transactions
+      S3_ENDPOINT_URL: http://s3:8333
+      S3_BUCKET: ${S3_BUCKET:-transactions}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY}
+      S3_SECRET_KEY: ${S3_SECRET_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      s3:
+        condition: service_healthy
+    profiles: ["tools"]
+volumes:
+  postgres-data:
+  s3-data:

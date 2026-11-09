@@ -1,0 +1,10 @@
+[Unit]
+Description=Lecture du bucket de transactions toutes les minutes
+
+[Timer]
+OnBootSec=60
+OnUnitInactiveSec=60
+Unit=transaction-pipeline.service
+
+[Install]
+WantedBy=timers.target
