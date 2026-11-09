@@ -1,0 +1,284 @@
+/* @theme integration */
+
+@import 'default';
+
+:root {
+  --ink: #17233b;
+  --muted: #667085;
+  --paper: #f7f8f5;
+  --green: #0f766e;
+  --green-light: #d9eee9;
+  --lime: #c9e265;
+  --coral: #e76f51;
+  --navy: #17233b;
+  --line: #d7ddd9;
+  --ruby: #9d5b8b;
+  --ruby-light: #f0e2ec;
+}
+
+section {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  padding: 58px 74px 52px;
+}
+
+section::after { color: var(--muted); font-size: 16px; right: 34px; }
+header, footer { color: var(--muted); font-size: 15px; }
+footer { left: 74px; }
+
+h1 {
+  color: var(--navy);
+  font-size: 46px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 0 0 28px;
+}
+
+h2 { color: var(--green); }
+p { line-height: 1.3; }
+code { color: var(--green); background: #e9efec; padding: .08em .25em; border-radius: 4px; font-size: .88em; }
+strong.lead-in { color: var(--ink); }
+
+/* ---------- Title, dividers, closing ---------- */
+
+section.title, section.divider {
+  background: var(--navy);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 88px;
+}
+
+section.title h1 { color: var(--lime); font-size: 82px; margin-bottom: 14px; }
+section.title h2 { color: white; font-size: 36px; max-width: 950px; line-height: 1.18; }
+.title-meta { color: #b9c4d6; font-size: 21px; margin-top: 40px; }
+
+section.divider h1 { color: var(--lime); font-size: 62px; margin-bottom: 16px; }
+.divider-kicker {
+  color: #8fa0bd; font-size: 18px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; margin-bottom: 20px;
+}
+.divider-contents {
+  color: #d5dce8; font-size: 22px; line-height: 1.45; max-width: 1010px;
+  list-style: none; margin: 8px 0 0; padding: 0; columns: 2; column-gap: 56px;
+}
+.divider-contents li { break-inside: avoid; margin: 0 0 12px; padding-left: 26px; position: relative; }
+.divider-contents li::before {
+  content: ""; position: absolute; left: 0; top: .58em;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--lime);
+}
+.divider-contents li::marker { content: ""; }
+
+section.closing { background: var(--navy); color: white; }
+section.closing h1 { color: var(--lime); }
+.closing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+.closing-grid div { border-top: 4px solid var(--lime); padding: 22px 10px 0; }
+.closing-grid > div > b, .closing-grid > div > span { display: block; }
+.closing-grid b { color: var(--lime); font-size: 23px; }
+.closing-grid span { color: #d9e0eb; font-size: 19px; line-height: 1.35; margin-top: 13px; }
+.closing-line { text-align: center; margin-top: 56px; font-size: 28px; }
+.closing-line em { color: var(--lime); font-style: normal; }
+
+/* ---------- Statements ---------- */
+
+section.statement { display: flex; flex-direction: column; justify-content: center; }
+.big-statement { font-size: 44px; font-weight: 650; line-height: 1.2; max-width: 1090px; }
+.big-statement em { color: var(--green); font-style: normal; }
+.statement-note { color: var(--muted); font-size: 21px; line-height: 1.35; margin-top: 40px; max-width: 1000px; }
+
+/* ---------- Agenda ---------- */
+
+.agenda { display: grid; gap: 14px; margin-top: 14px; }
+.agenda > div { display: grid; grid-template-columns: 58px 300px 1fr; align-items: center; background: white; padding: 19px 24px; }
+.agenda > div > b { color: var(--coral); font-size: 26px; }
+.agenda > div > strong { font-size: 22px; }
+.agenda > div > span { color: var(--muted); font-size: 17px; line-height: 1.35; }
+
+/* ---------- Metric rows ---------- */
+
+.metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 44px; }
+.metric-row.three { grid-template-columns: repeat(3, 1fr); }
+.metric { border-top: 5px solid var(--lime); background: white; padding: 20px 18px; }
+.metric > strong { display: block; color: var(--green); font-size: 36px; line-height: 1; }
+.metric > span { display: block; color: var(--muted); font-size: 17px; line-height: 1.3; margin-top: 10px; }
+.metric.accent { background: var(--green); border-color: var(--green); }
+.metric.accent > strong { color: var(--lime); }
+.metric.accent > span { color: white; }
+
+/* ---------- Column and card grids ---------- */
+
+.three-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 34px; }
+.three-columns > div { border-left: 5px solid var(--lime); padding-left: 18px; }
+.three-columns > div > b, .three-columns > div > span { display: block; }
+/* Keep each heading to one line: a wrapped heading pushes only its own column's
+   body down and the three columns stop sharing a baseline. */
+.three-columns > div > b { font-size: 23px; line-height: 1.2; }
+.three-columns > div > span { color: var(--muted); font-size: 18px; line-height: 1.3; margin-top: 8px; }
+
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 30px; }
+.why-grid > div { border-left: 5px solid var(--lime); padding-left: 18px; }
+.why-grid > div > b, .why-grid > div > span { display: block; }
+.why-grid > div > b { font-size: 22px; }
+.why-grid > div > span { color: var(--muted); font-size: 18px; line-height: 1.3; margin-top: 7px; }
+
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 34px; }
+.cards.two { grid-template-columns: 1fr 1fr; }
+.cards > div { background: white; border-top: 5px solid var(--green); min-height: 300px; padding: 24px; }
+.cards > div > b, .cards > div > strong, .cards > div > span, .cards > div > small { display: block; }
+.cards > div > b { color: var(--green); font-size: 17px; letter-spacing: .06em; text-transform: uppercase; }
+.cards > div > strong { font-size: 25px; line-height: 1.15; margin: 15px 0 18px; }
+.cards > div > span { font-size: 19px; line-height: 1.35; }
+.cards > div > small { color: var(--muted); border-top: 1px solid var(--line); font-size: 16px; line-height: 1.35; margin-top: 20px; padding-top: 15px; }
+.cards > div.rejected { border-top-color: var(--coral); }
+.cards > div.rejected > b { color: var(--coral); }
+.cards > div.chosen { background: var(--green-light); border-top-color: var(--green); }
+
+/* ---------- Two-panel comparison ---------- */
+
+.before-after { display: grid; grid-template-columns: 1fr 58px 1fr; align-items: center; gap: 16px; margin-top: 28px; }
+.panel { min-height: 370px; padding: 26px 30px; border-radius: 12px; }
+.panel.muted { background: #e8ebe9; }
+.panel.accent { background: var(--green-light); border: 2px solid var(--green); }
+.panel > b { display: block; font-size: 23px; margin-bottom: 12px; }
+.panel.accent > b { color: var(--green); }
+.panel ul { margin: 0; padding-left: 22px; font-size: 20px; line-height: 1.45; }
+.arrow { font-size: 44px; color: var(--green); text-align: center; }
+
+/* ---------- Pipeline bands ---------- */
+
+.pipeline { display: flex; align-items: stretch; gap: 12px; margin-top: 40px; }
+.pipeline > div { flex: 1; background: white; border-top: 5px solid var(--ruby); padding: 22px 16px; text-align: center; }
+.pipeline > div.engine { border-top-color: var(--green); background: var(--green-light); flex: 1.5; }
+.pipeline > div > b, .pipeline > div > span { display: block; }
+.pipeline > div > b { font-size: 22px; }
+.pipeline > div > span { color: var(--muted); font-size: 15px; line-height: 1.3; margin-top: 10px; }
+.pipeline i { align-self: center; color: var(--muted); font-size: 26px; font-style: normal; }
+.band-legend { display: flex; gap: 30px; justify-content: center; margin-top: 30px; color: var(--muted); font-size: 18px; }
+.band-legend em { font-style: normal; font-weight: 700; }
+.band-legend .ruby-key { color: var(--ruby); }
+.band-legend .engine-key { color: var(--green); }
+
+/* ---------- Inline SVG diagrams ----------
+   Every diagram is hand-drawn SVG with a viewBox 1132 wide (the content width at
+   16:9 with this padding), so 1 SVG unit = 1 rendered pixel and the text sizes
+   below match the rest of the slide. Keep it that way: scaling a diagram makes
+   its labels disagree with the prose around it. */
+
+.diagram { display: block; width: 100%; height: auto; margin: 24px 0 0; }
+.diagram.tight { margin-top: 12px; }
+.diagram text { font-family: Inter, "IBM Plex Sans", "Segoe UI", Arial, sans-serif; }
+
+.dg-box { fill: #fff; stroke: var(--line); stroke-width: 2; }
+.dg-box.ruby { stroke: var(--ruby); stroke-width: 3; }
+.dg-box.engine { fill: var(--green-light); stroke: var(--green); stroke-width: 3; }
+.dg-box.dim { fill: #ecefed; stroke: #ccd4d0; }
+.dg-box.bad { fill: #fbeae4; stroke: var(--coral); stroke-width: 3; }
+.dg-band { fill: #eef1ef; stroke: none; }
+
+.dg-h { font-size: 19px; font-weight: 700; fill: var(--ink); }
+.dg-h.on-dark { fill: #fff; }
+.dg-h.ruby { fill: var(--ruby); }
+.dg-h.engine { fill: var(--green); }
+.dg-t { font-size: 16px; fill: var(--muted); }
+.dg-t.strong { fill: var(--ink); font-weight: 600; }
+.dg-s { font-size: 14px; fill: var(--muted); }
+.dg-n { font-size: 26px; font-weight: 700; fill: var(--coral); }
+.dg-n.good { fill: var(--green); }
+
+.dg-line { stroke: var(--muted); stroke-width: 2; fill: none; }
+.dg-line.engine { stroke: var(--green); stroke-width: 3; }
+.dg-line.dashed { stroke-dasharray: 6 5; }
+
+/* ---------- Bar rows ---------- */
+
+.bars { margin: 34px 60px 22px; }
+.bar-row { display: grid; grid-template-columns: 250px 1fr 90px; gap: 14px; align-items: center; margin: 13px 0; }
+.bar-row span, .bar-row b { font-size: 20px; }
+.bar-row i { width: var(--w); height: 30px; background: var(--green); border-radius: 3px; display: block; }
+.bar-row.warn i { background: var(--coral); }
+.bar-row.warn b { color: var(--coral); }
+.bar-row.faint i { background: #b9c4c1; }
+
+/* ---------- Tables ---------- */
+
+.anchor-table { width: 100%; margin: 20px auto 18px; border-collapse: collapse; font-size: 19px; }
+.anchor-table th, .anchor-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.25; }
+.anchor-table th { color: var(--green); font-size: 17px; letter-spacing: .04em; text-transform: uppercase; }
+.anchor-table tr.winner td { background: var(--green-light); }
+.anchor-table tr.out td { color: var(--muted); }
+.anchor-table td small { display: block; color: var(--muted); font-size: 15px; margin-top: 3px; }
+
+section.table-slide h1 { font-size: 42px; margin-bottom: 16px; }
+section.table-slide table { border-collapse: collapse; font-size: 17px; line-height: 1.25; width: 100%; }
+section.table-slide th, section.table-slide td { border-bottom: 1px solid var(--line); padding: 8px 11px; vertical-align: top; }
+section.table-slide th { color: var(--green); text-align: left; }
+
+/* ---------- Decision lists ---------- */
+
+.choice-list { display: grid; gap: 9px; margin-top: 20px; }
+.choice-list > div { display: grid; grid-template-columns: 40px 330px 1fr; align-items: center; background: white; min-height: 60px; padding: 9px 18px; }
+.choice-list > div > b { font-size: 19px; }
+.choice-list > div > strong { font-size: 19px; }
+.choice-list > div > span { color: var(--muted); font-size: 16px; line-height: 1.3; }
+.choice-list.taken > div > b { color: var(--green); }
+.choice-list.taken > div { border-left: 4px solid var(--green); }
+.choice-list.open > div > b { color: var(--coral); }
+.choice-list.open > div { border-left: 4px solid var(--coral); }
+
+/* ---------- Ordered / bulleted step lists ---------- */
+
+.ordered-steps, .outcome-list { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.ordered-steps li, .outcome-list li {
+  color: var(--muted); font-size: 19px; line-height: 1.3;
+  margin-bottom: 12px; padding-left: 34px; position: relative;
+}
+.ordered-steps li::marker, .outcome-list li::marker { content: ""; }
+.ordered-steps li strong, .outcome-list li strong { color: var(--ink); }
+.ordered-steps li::before {
+  counter-increment: step; content: counter(step);
+  position: absolute; left: 0; top: 1px;
+  width: 23px; height: 23px; border-radius: 50%;
+  background: var(--green); color: white;
+  font-size: 14px; font-weight: 700; text-align: center; line-height: 23px;
+}
+.outcome-list li::before {
+  content: ""; position: absolute; left: 6px; top: .5em;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--green);
+}
+.two-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; margin-top: 30px; }
+.two-lists b { display: block; font-size: 23px; margin-bottom: 16px; }
+
+/* ---------- Notes and callouts ---------- */
+
+/* Full content width, not centred: the panel always sits under a grid of columns
+   or tiles, and an inset box does not line up with anything above it. */
+.plain-explanation {
+  background: white; border-left: 6px solid var(--coral); box-sizing: border-box;
+  font-size: 21px; line-height: 1.35; margin: 26px 0 0; padding: 16px 22px;
+}
+.plain-explanation.good { border-left-color: var(--green); }
+.level-note {
+  background: var(--navy); color: white; font-size: 19px; line-height: 1.35;
+  margin: 26px auto 0; max-width: 940px; padding: 14px 22px; text-align: center;
+}
+.level-note strong { color: var(--lime); }
+.small-note { color: var(--muted); font-size: 16px; line-height: 1.35; margin-top: 20px; }
+.centered { text-align: center; }
+
+section.appendix { font-size: 21px; }
+section.appendix h1 { font-size: 41px; margin-bottom: 16px; }
+section.appendix table { width: 100%; font-size: 16px; line-height: 1.2; border-collapse: collapse; }
+section.appendix th, section.appendix td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+section.appendix th { color: var(--green); }
+
+/* Two-axis slide: three dense bullets per panel, plus a note below */
+section.axes .panel { min-height: 0; padding: 22px 26px; }
+section.axes .panel ul { font-size: 18px; line-height: 1.35; }
+section.axes .panel ul li { margin-bottom: 12px; }
+section.axes .panel ul li:last-child { margin-bottom: 0; }
+section.axes .before-after { margin-top: 18px; }
+section.axes .level-note { margin-top: 22px; }

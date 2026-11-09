@@ -1,0 +1,10 @@
+# Marp configuration for this deck. Picked up automatically when marp-cli is run
+# from this directory.
+#
+# html: true is REQUIRED. The slides are built from raw HTML blocks and hand-written
+# inline SVG diagrams; with marp's default allowlist the <svg> markup is escaped and
+# the diagram slides render as a wall of source code. The --html flag does the same
+# thing, but only for the command that remembers to pass it.
+html: true
+themeSet:
+  - ./theme.css

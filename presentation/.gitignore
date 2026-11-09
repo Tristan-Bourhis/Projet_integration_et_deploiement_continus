@@ -1,0 +1,4 @@
+# Rendered decks are regenerated from the Markdown — never committed.
+*.html
+*.pdf
+*.pptx
