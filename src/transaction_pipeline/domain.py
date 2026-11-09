@@ -32,4 +32,4 @@ def totals(transactions: tuple[Transaction, ...], group: Group) -> dict[str, int
 
 
 def flag_transactions(transactions: tuple[Transaction, ...]) -> tuple[Transaction, ...]:
-    return tuple(replace(t, flagged=t.montant > 500_000) for t in transactions)
+    return tuple(replace(t, flagged=t.montant >= 500_000) for t in transactions)
