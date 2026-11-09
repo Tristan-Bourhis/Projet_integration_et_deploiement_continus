@@ -20,4 +20,15 @@ Les tests PostgreSQL couvrent l'insertion, les trois regroupements exacts, les f
 
 Le correctif de concurrence a été vérifié sur PostgreSQL réel : `RETURNING` remplace une détection basée sur `rowcount`, qui n'est pas fiable avec tous les pilotes. SeaweedFS dispose de 100 emplacements de volumes et écoute explicitement sur toutes les interfaces internes au conteneur ; ses ports publics restent liés à 127.0.0.1 sur l'hôte.
 
-**Non exécutés ici :** création de ressources AWS (`terraform apply`), accès à une VM distante, job CD et exécution GitHub Actions sur un dépôt distant. Ces étapes nécessitent la configuration personnelle décrite dans [le guide de déploiement](deploiement.md).
+**Non exécutés ici :** création de ressources AWS (`terraform apply`), accès à une VM distante et job CD. Ces étapes nécessitent la configuration personnelle décrite dans [le guide de déploiement](deploiement.md).
+
+## Vérification GitHub Actions du 9 novembre 2026
+
+Le dépôt distant est maintenant configuré et le projet publié sur `main`.
+La [première exécution CI](https://github.com/Tristan-Bourhis/Projet_integration_et_deploiement_continus/actions/runs/42585480183), sur le commit `cedbd6b`, a réussi :
+
+- qualité et tests sous Python 3.12 et 3.14 ;
+- intégration réelle PostgreSQL/SeaweedFS, retries et second passage sans doublons ;
+- formatage et validation Terraform.
+
+Le job `deploy` est ignoré : le déploiement de production reste à configurer. Une validation Terraform réussie ne signifie pas que les ressources AWS ont été créées.

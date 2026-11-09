@@ -111,18 +111,11 @@ src/transaction_pipeline/   modèles, validation, génération, SQL, S3, orchest
 
 Voir [les vérifications réalisées](docs/verification.md), [l'architecture et les limites](docs/architecture.md), [les preuves d'échec et de correction](docs/demonstration.md), et [le guide de déploiement](docs/deploiement.md).
 
-## CI/CD et premier push
+## CI/CD sur GitHub
 
-Git est initialisé sur `main`, sans commit et sans remote. Après avoir créé un **dépôt GitHub vide** de ton côté :
-
-```bash
-cd transaction-pipeline  # si tu es dans le dossier parent
-
-git remote add origin <URL_DU_REPO>
-git add .
-git commit -m "Initialisation de la pipeline de transactions"
-git push -u origin main
-```
+Le projet est publié dans [Tristan-Bourhis/Projet_integration_et_deploiement_continus](https://github.com/Tristan-Bourhis/Projet_integration_et_deploiement_continus).
+Les exécutions sont disponibles dans [GitHub Actions](https://github.com/Tristan-Bourhis/Projet_integration_et_deploiement_continus/actions).
+La branche `demo/echec-ci` conserve une régression volontaire du seuil de signalement suivie de sa correction ; voir [les preuves](docs/demonstration.md).
 
 La CI s'exécute automatiquement à chaque push et pull request : Ruff, tests Python 3.12/3.14, vrais services S3/PostgreSQL, image Docker, déduplication, `terraform fmt` et `terraform validate`. Les journaux et rapports sont conservés comme artifacts GitHub Actions. Les scénarios d'échec attendus de `make demo` sont vérifiés et ne font pas échouer la CI ; une régression inattendue la fait échouer.
 

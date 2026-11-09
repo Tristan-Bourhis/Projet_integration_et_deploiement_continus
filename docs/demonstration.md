@@ -50,4 +50,21 @@ make demo
 
 `make integration` déclenche deux échecs de récupération puis vérifie le succès et les valeurs en PostgreSQL. Un autre test impose cinq échecs pour cinq tentatives et vérifie qu'aucune transaction n'a été insérée. Les tests unitaires couvrent également un vrai objet d'erreur HTTP 503, un échec de connexion, la pagination et l'absence de retry sur HTTP 403.
 
-La CI exécute aussi le conteneur complet avec `--fail-db 2 --fail-s3 2`. Les captures d'une exécution GitHub Actions pourront être ajoutées après le premier push, le dépôt distant n'étant pas encore lié.
+La CI exécute aussi le conteneur complet avec `--fail-db 2 --fail-s3 2`. Une démonstration sur GitHub Actions est également disponible ci-dessous.
+
+## Démonstration réelle sur GitHub Actions
+
+Le 9 novembre 2026, la branche `demo/echec-ci` a été utilisée pour publier une erreur volontaire, puis sa correction, sans modifier le code de `main`.
+
+1. **Cause** : le commit `7511a91` remplace `montant > 500_000` par `montant >= 500_000` dans `domain.py` (montants en centimes). Les transactions de exactement 5 000 € sont alors signalées à tort.
+2. **Échec** : [exécution 42585545054](https://github.com/Tristan-Bourhis/Projet_integration_et_deploiement_continus/actions/runs/42585545054). Les tests unitaires et d'intégration échouent. Le test CLI indique `assert 6 == 4` ; le test de pureté et de seuil constate également le flag incorrect.
+3. **Correction** : le commit `cbc57cc` restaure l'opérateur strict `>`.
+4. **Réussite après correction** : [exécution 42585585329](https://github.com/Tristan-Bourhis/Projet_integration_et_deploiement_continus/actions/runs/42585585329).
+
+Ces liens pointent vers les exécutions distantes réelles. Les six premières captures de ce document restent celles de la démonstration locale.
+
+![Échec réel de la CI GitHub Actions](captures/ci-echec.png)
+
+![Réussite après correction sur GitHub Actions](captures/ci-correction.png)
+
+![CI réussie sur main](captures/ci-main.png)
